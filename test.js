@@ -18,6 +18,7 @@ ws_client.runTestSuite(file).then(async(body) => {
             console.log(JSON.parse(state).webservice.state);
             await delay(2000);
         }
+        //If test is error
         else if(JSON.parse(state).webservice.state == 'error') {
             console.log(JSON.parse(state).webservice.state);
             flag = true;
@@ -46,8 +47,6 @@ ws_client.runTestSuite(file).then(async(body) => {
             })
         }
     }
-
-    
 })
 
 async function delay(time) {
