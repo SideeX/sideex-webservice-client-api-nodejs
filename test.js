@@ -42,7 +42,7 @@ ws_client.runTestSuite(file).then(async(body) => {
             flag = true;
 
             //Delete the test case and report from the server
-            ws_client.deleteReport(token).then(response => {
+            ws_client.deleteJob(token).then(response => {
                 console.log(response);
             })
         }

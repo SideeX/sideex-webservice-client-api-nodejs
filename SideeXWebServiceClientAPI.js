@@ -39,7 +39,7 @@ class SideeXWebserviceClientAPI {
                 filename: file.path,
                 knownLength: file.length
             });
-            let response = await fetch(this.baseURL + "sideex-webservice", {
+            let response = await fetch(this.baseURL + "sideex-webservice/runTestSuites", {
                 method: 'POST',
                 body: formData,
                 agent: this.keepAliveAgent
@@ -51,7 +51,7 @@ class SideeXWebserviceClientAPI {
     }
 
     async getState(token) {
-        let response = await fetch(`${this.baseURL}sideex-webservice-state?token=${token}`, {
+        let response = await fetch(`${this.baseURL}sideex-webservice/getState?token=${token}`, {
             method: 'GET',
             agent: this.keepAliveAgent
         })
@@ -61,9 +61,9 @@ class SideeXWebserviceClientAPI {
     async download(formData, filePath, option) {
         let tempBaseURL = this.baseURL;
         if (option == 0) {
-            tempBaseURL = tempBaseURL + "sideex-webservice-reports";
+            tempBaseURL = tempBaseURL + "sideex-webservice/downloadReports";
         } else {
-            tempBaseURL = tempBaseURL + "sideex-webservice-logs";
+            tempBaseURL = tempBaseURL + "sideex-webservice/downloadLogs";
         }
 
         let response = await fetch(`${tempBaseURL}?token=${formData.token}&file=${formData.file}`, {
@@ -73,8 +73,8 @@ class SideeXWebserviceClientAPI {
         await response.body.pipe(fs.createWriteStream(filePath));
     }
 
-    async deleteReport(token) {
-        let response = await fetch(`${this.baseURL}sideex-webservice-delete?token=${token}`, {
+    async deleteJob(token) {
+        let response = await fetch(`${this.baseURL}sideex-webservice/deleteJob?token=${token}`, {
             method: 'POST',
             agent: this.keepAliveAgent
         })
