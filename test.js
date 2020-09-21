@@ -1,6 +1,6 @@
 //Include the Client API lib
 const fs = require('fs');
-var { SideeXWebserviceClientAPI: wsclientAPI, ProtocalType } = require('sideex-webservice-client');
+var { SideeXWebserviceClientAPI: wsclientAPI, ProtocalType } = require('./SideeXWebServiceClientAPI');
 
 //Connect to a SideeX WebService server
 let ws_client = new wsclientAPI('http://127.0.0.1:50000/', ProtocalType.HTTP);
