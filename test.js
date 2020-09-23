@@ -1,9 +1,9 @@
 //Include the Client API lib
 const fs = require('fs');
-var { SideeXWebserviceClientAPI: wsclientAPI, ProtocalType } = require('./SideeXWebServiceClientAPI');
+var { SideeXWebserviceClientAPI: wsclientAPI, ProtocolType: ProtocolType } = require('./SideeXWebServiceClientAPI');
 
 //Connect to a SideeX WebService server
-let ws_client = new wsclientAPI('http://127.0.0.1:50000/', ProtocalType.HTTP);
+let ws_client = new wsclientAPI('http://127.0.0.1:50000/', ProtocolType.HTTP);
 let file = fs.createReadStream('testcase.zip');
 ws_client.runTestSuite(file).then(async(body) => {
     let token = JSON.parse(body).token; // get the token
