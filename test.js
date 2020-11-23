@@ -1,10 +1,17 @@
 //Include the Client API lib
+const { rejects } = require('assert');
 const fs = require('fs');
+const { resolve } = require('path');
 var { SideeXWebserviceClientAPI: wsclientAPI, ProtocolType: ProtocolType } = require('./SideeXWebServiceClientAPI');
 
 //Connect to a SideeX WebService server
 let ws_client = new wsclientAPI('http://127.0.0.1:50000/', ProtocolType.HTTP);
-let file = fs.createReadStream('testcase.zip');
+
+ws_client.echo().then((body)=> {
+    console.log(body);
+})
+
+let file = fs.createReadStream('D:/workspace/sideex-webservice-client-api-java/testcase.zip');
 ws_client.runTestSuite(file).then(async(body) => {
     let token = JSON.parse(body).token; // get the token
     let flag = false;
@@ -27,28 +34,21 @@ ws_client.runTestSuite(file).then(async(body) => {
         else {
             console.log(JSON.parse(state).webservice.state);
             let formData = {
-                    token: token,
-                    file: "reports.zip"
-                }
-                //Download the test report
-            ws_client.download(formData, "./reports.zip", 0);
-
-            formData = {
-                    token: token
-                }
-                //Download the logs
-            ws_client.download(formData, "./logs.zip", 1);
+                token: token,
+                file: "reports.zip"
+            }
+            //Download the test report
+            await ws_client.download(formData, "./reports.zip", 0);
 
             flag = true;
 
             //Delete the test case and report from the server
-            ws_client.deleteJob(token).then(response => {
+            await ws_client.deleteJob(token).then(response => {
                 console.log(response);
-            })
+            });
         }
     }
 })
-
 async function delay(time) {
     await new Promise((resolve) => { setTimeout(resolve, time); });
 }

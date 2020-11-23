@@ -30,6 +30,15 @@ class SideeXWebserviceClientAPI {
         }
     }
 
+    async echo() {
+        let response = await fetch(`${this.baseURL}sideex-webservice/echo`, {
+            method: 'GET',
+            agent: this.keepAliveAgent
+        })
+        // console.log(response.text())
+        return await  response.text();
+    }
+
     async runTestSuite(file) {
         try {
             fs.accessSync(file.path, fs.constants.F_OK | fs.constants.R_OK);
