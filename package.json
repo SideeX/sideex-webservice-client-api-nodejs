@@ -1,6 +1,6 @@
 {
     "name": "@sideex/webservice-client",
-    "version": "0.9.1-1",
+    "version": "0.9.2-1",
     "description": "SideeX WebService Client API for NodeJS handles the transfer of test suites to a self-hosted SideeX WebService server and returns the test reports.",
     "main": "SideeXWebServiceClientAPI.js",
     "scripts": {

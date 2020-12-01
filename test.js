@@ -4,7 +4,7 @@ const fs = require('fs');
 const { resolve } = require('path');
 var { SideeXWebserviceClientAPI: wsclientAPI, ProtocolType: ProtocolType } = require('./SideeXWebServiceClientAPI');
 
-//Connect to a SideeX WebService server
+//Gets SideeX WebService server status
 let ws_client = new wsclientAPI('http://127.0.0.1:50000/', ProtocolType.HTTP);
 
 ws_client.echo().then((body)=> {
